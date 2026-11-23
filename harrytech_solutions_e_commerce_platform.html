@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HarryTech Solutions - Premium Tech Store</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            light: '#FFE57F',
+                            DEFAULT: '#D4AF37',
+                            hover: '#C59B27',
+                            dark: '#997A15',
+                            metallic: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)'
+                        },
+                        dark: {
+                            base: '#0B0F17',
+                            surface: '#151C28',
+                            card: '#1E2738',
+                            border: '#2E3A52',
+                            hover: '#28344A'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0B0F17;
+            color: #E2E8F0;
+        }
+
+        /* Gold Gradient Text */
+        .gold-text-gradient {
+            background: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #AA771C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Gold Border Glow */
+        .gold-border-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F17;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2E3A52;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        .phone-shake {
+            animation: shake 0.5s infinite;
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-gold selection:text-black">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-gradient-to-r from-gold-dark via-gold to-gold-dark text-black text-xs font-bold py-1.5 px-4 text-center tracking-wide flex justify-between items-center px-6">
+        <span class="hidden sm:inline"><i class="fa-solid fa-shield-halved mr-1"></i> OFFICIAL HARRYTECH STORE — 100% GENUINE GUARANTEE</span>
+        <span class="mx-auto sm:mx-0"><i class="fa-solid fa-truck-fast mr-1"></i> FAST COUNTRYWIDE DELIVERY VIA M-PESA DARAJA CHECKOUT</span>
+        <span class="hidden md:inline"><i class="fa-solid fa-headset mr-1"></i> 24/7 SUPPORT: +254 700 000 000</span>
+    </div>
+
+    <!-- MAIN HEADER (Jiji Style Layout with Gold & Dark Theme) -->
+    <header class="sticky top-0 z-40 bg-dark-surface/95 backdrop-blur-md border-b border-dark-border shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+            
+            <!-- BRAND LOGO -->
+            <a href="#" onclick="switchCategory('All')" class="flex items-center gap-2 group shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center font-extrabold text-black text-xl shadow-lg group-hover:scale-105 transition-transform">
+                    H
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white block leading-none">
+                        HARRY<span class="gold-text-gradient">TECH</span>
+                    </span>
+                    <span class="text-[10px] tracking-widest text-gold uppercase font-semibold block mt-0.5">Solutions</span>
+                </div>
+            </a>
+
+            <!-- SEARCH BAR (Jiji Inspired Central Search) -->
+            <div class="flex-1 max-w-2xl hidden md:flex items-center relative">
+                <div class="relative w-full">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search gadgets, laptops, smartphones, audio..." 
+                           class="w-full bg-dark-card border border-dark-border rounded-l-xl py-2.5 pl-11 pr-4 text-sm text-white focus:outline-none focus:border-gold transition-colors">
+                </div>
+                <button onclick="handleSearch()" class="bg-gold hover:bg-gold-hover text-black font-bold text-sm px-6 py-2.5 rounded-r-xl transition-colors flex items-center gap-2 shrink-0">
+                    Search
+                </button>
+            </div>
+
+            <!-- ACTION BUTTONS & USER NAV -->
+            <div class="flex items-center gap-3">
+                
+                <!-- Admin Toggle Button -->
+                <button onclick="toggleAdminView()" id="adminNavBtn" title="Seller Admin Panel" 
+                        class="hidden bg-dark-card border border-gold/40 hover:border-gold text-gold text-xs font-semibold px-3 py-2 rounded-lg transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-gear text-sm"></i>
+                    <span class="hidden lg:inline">Seller Portal</span>
+                </button>
+
+                <!-- Auth Button -->
+                <div id="authNavContainer">
+                    <button onclick="openAuthModal('login')" class="text-xs sm:text-sm text-gray-300 hover:text-gold font-semibold px-2 py-1 flex items-center gap-1.5 transition-colors">
+                        <i class="fa-regular fa-user text-base"></i>
+                        <span>Sign In</span>
+                    </button>
+                </div>
+
+                <!-- Shopping Cart Icon -->
+                <button onclick="toggleCartDrawer()" class="relative bg-dark-card border border-dark-border hover:border-gold/50 p-2.5 rounded-xl transition-all">
+                    <i class="fa-solid fa-bag-shopping text-gold text-lg"></i>
+                    <span id="cartBadge" class="absolute -top-1.5 -right-1.5 bg-gold text-black text-xs font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-dark-base hidden">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- MOBILE SEARCH BAR -->
+        <div class="px-4 pb-3 md:hidden">
+            <div class="relative flex items-center">
+                <input type="text" id="mobileSearchInput" oninput="handleSearchMobile()" placeholder="Search gadgets, accessories..." 
+                       class="w-full bg-dark-card border border-dark-border rounded-xl py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-gold">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 text-gray-400 text-sm"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO & BANNER SECTION -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+        <div class="relative bg-gradient-to-r from-dark-card via-dark-surface to-dark-card border border-gold/20 rounded-2xl p-6 sm:p-10 overflow-hidden shadow-2xl">
+            <!-- Decorative Accent -->
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="max-w-xl relative z-10">
+                <div class="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold text-xs font-bold px-3 py-1 rounded-full mb-3">
+                    <i class="fa-solid fa-crown"></i> Official HarryTech Direct Store
+                </div>
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight mb-3">
+                    Premium Tech & Electronics <br><span class="gold-text-gradient">Directly From Store to You</span>
+                </h1>
+                <p class="text-gray-400 text-xs sm:text-sm mb-6">
+                    No middleman sellers. 100% Authentic products inspected & guaranteed by HarryTech Solutions with instant M-Pesa payments.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#catalog" class="bg-gold hover:bg-gold-hover text-black font-bold text-xs sm:text-sm px-6 py-3 rounded-xl transition-all shadow-lg shadow-gold/20 flex items-center gap-2">
+                        Explore Catalog <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                    <div class="bg-dark-base/60 border border-dark-border rounded-xl px-4 py-2.5 flex items-center gap-3">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" class="h-6" alt="M-Pesa Logo" onerror="this.src='https://placehold.co/80x30/000/FFF?text=M-PESA'">
+                        <span class="text-xs font-semibold text-gray-300">Daraja Express API Ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN APP CONTENT AREA -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full" id="catalog">
+        
+        <!-- ADMIN DASHBOARD PANEL (HIDDEN BY DEFAULT) -->
+        <div id="adminPanel" class="hidden bg-dark-surface border border-gold/40 rounded-2xl p-6 mb-8 shadow-2xl animate-fade-in">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-dark-border">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gold/20 text-gold flex items-center justify-center">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white">HarryTech Store Management Portal</h2>
+                        <p class="text-xs text-gray-400">Exclusive admin interface to add and manage official inventory items.</p>
+                    </div>
+                </div>
+                <button onclick="toggleAdminView()" class="text-xs text-gray-400 hover:text-white bg-dark-card px-3 py-1.5 rounded-lg border border-dark-border">
+                    <i class="fa-solid fa-xmark mr-1"></i> Exit Admin Mode
+                </button>
+            </div>
+
+            <!-- ADD PRODUCT FORM -->
+            <form id="addProductForm" onsubmit="handleCreateProduct(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 bg-dark-card p-4 rounded-xl border border-dark-border">
+                <div class="md:col-span-3 font-bold text-sm text-gold mb-1">Add New Item to Store Catalog</div>
+                
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Product Title</label>
+                    <input type="text" id="pTitle" required placeholder="e.g. MacBook Pro M3 Max" class="w-full bg-dark-base border border-dark-border rounded-lg p-2.5 text-xs text-white focus:border-gold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Category</label>
+                    <select id="pCategory" required class="w-full bg-dark-base border border-dark-border rounded-lg p-2.5 text-xs text-white focus:border-gold">
+                        <option value="Laptops">Laptops</option>
+                        <option value="Smartphones">Smartphones</option>
+                        <option value="Audio">Audio</option>
+                        <option value="Accessories">Accessories</option>
+                        <option value="Gaming">Gaming</option>
+                        <option value="Smart Home">Smart Home</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Price (KES)</label>
+                    <input type="number" id="pPrice" required min="1" placeholder="e.g. 185000" class="w-full bg-dark-base border border-dark-border rounded-lg p-2.5 text-xs text-white focus:border-gold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Image URL</label>
+                    <input type="url" id="pImage" required placeholder="https://images.unsplash.com/..." class="w-full bg-dark-base border border-dark-border rounded-lg p-2.5 text-xs text-white focus:border-gold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Stock Quantity</label>
+                    <input type="number" id="pStock" required min="1" value="10" class="w-full bg-dark-base border border-dark-border rounded-lg p-2.5 text-xs text-white focus:border-gold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Badge</label>
+                    <input type="text" id="pBadge" placeholder="e.g. NEW, BESTSELLER, OFFER" class="w-full bg-dark-base border border-dark-border rounded-lg p-2.5 text-xs text-white focus:border-gold">
+                </div>
+                <div class="md:col-span-3">
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Product Description</label>
+                    <textarea id="pDesc" rows="2" placeholder="Key specifications & features..." class="w-full bg-dark-base border border-dark-border rounded-lg p-2.5 text-xs text-white focus:border-gold"></textarea>
+                </div>
+                <div class="md:col-span-3 text-right">
+                    <button type="submit" class="bg-gold hover:bg-gold-hover text-black font-bold text-xs px-6 py-2.5 rounded-lg transition-all">
+                        <i class="fa-solid fa-plus mr-1"></i> Add Product to Public Store
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- CATEGORIES BAR (JIJI STYLE TABS) -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 border-b border-dark-border scrollbar-none" id="categoriesBar">
+            <!-- Dynamic Category Buttons populated via JS -->
+        </div>
+
+        <!-- PRODUCT GRID & SIDEBAR SECTION -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            
+            <!-- LEFT SIDEBAR: FILTERS & BANNER -->
+            <div class="lg:col-span-1 space-y-6">
+                
+                <!-- Filter Box -->
+                <div class="bg-dark-surface border border-dark-border rounded-2xl p-4">
+                    <h3 class="text-sm font-bold text-white mb-4 flex items-center justify-between">
+                        <span><i class="fa-solid fa-sliders text-gold mr-2"></i>Filter Products</span>
+                        <button onclick="resetFilters()" class="text-[11px] text-gray-400 hover:text-gold">Reset</button>
+                    </h3>
+
+                    <!-- Price Range -->
+                    <div class="mb-4">
+                        <label class="block text-xs font-medium text-gray-400 mb-2">Max Price: <span id="priceValue" class="text-gold font-bold">KSh 500,000</span></label>
+                        <input type="range" id="priceRange" min="5000" max="500000" step="5000" value="500000" oninput="handlePriceFilter(this.value)" class="w-full accent-gold">
+                    </div>
+
+                    <!-- Availability -->
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer">
+                            <input type="checkbox" id="inStockOnly" onchange="applyAllFilters()" class="rounded bg-dark-base border-dark-border text-gold focus:ring-0">
+                            In Stock Only
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Trust Badge Banner -->
+                <div class="bg-gradient-to-br from-dark-surface to-dark-card border border-gold/30 rounded-2xl p-4 text-center">
+                    <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-3 text-gold text-xl">
+                        <i class="fa-solid fa-lock-keyhole"></i>
+                    </div>
+                    <h4 class="text-xs font-bold text-white mb-1">Single Seller Guaranteed</h4>
+                    <p class="text-[11px] text-gray-400 leading-relaxed">
+                        Every listing on HarryTech Solutions is officially verified, stocked, and fulfilled by us directly. No scammers, no fake third-party sellers.
+                    </p>
+                </div>
+            </div>
+
+            <!-- RIGHT GRID: PRODUCTS LISTING -->
+            <div class="lg:col-span-3">
+                
+                <!-- Status Header -->
+                <div class="flex justify-between items-center mb-4">
+                    <p class="text-xs text-gray-400">
+                        Showing <span id="productCount" class="text-white font-bold">0</span> gadgets available
+                    </p>
+                    <select id="sortBy" onchange="handleSort(this.value)" class="bg-dark-surface border border-dark-border rounded-lg text-xs text-gray-300 p-2 focus:border-gold">
+                        <option value="featured">Sort by: Featured</option>
+                        <option value="low-high">Price: Low to High</option>
+                        <option value="high-low">Price: High to Low</option>
+                    </select>
+                </div>
+
+                <!-- Products Grid Container -->
+                <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <!-- Products rendered dynamic via JS -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="hidden text-center py-16 bg-dark-surface rounded-2xl border border-dark-border">
+                    <i class="fa-solid fa-microchip text-4xl text-gray-600 mb-3"></i>
+                    <h3 class="text-base font-bold text-white">No items found matching criteria</h3>
+                    <p class="text-xs text-gray-400 mt-1">Try adjusting your search terms or filters.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SHOPPING CART DRAWER (SLIDE OVER - FIXED RESPONSIVE BOUNDARIES) -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-all">
+        <div id="cartBackdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto hidden"></div>
+
+        <div id="cartPanel" class="absolute inset-y-0 right-0 max-w-full flex sm:pl-10 transform translate-x-full transition-transform duration-300 pointer-events-auto">
+            <div class="w-full sm:w-md max-w-md bg-dark-surface border-l border-dark-border shadow-2xl flex flex-col justify-between h-full">
+                
+                <!-- Header -->
+                <div class="p-4 sm:p-6 border-b border-dark-border flex justify-between items-center bg-dark-card shrink-0">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-gold text-lg"></i>
+                        <h2 class="text-base font-bold text-white">Your Shopping Cart</h2>
+                    </div>
+                    <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white p-1">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+                    <!-- Cart items rendered here dynamically -->
+                </div>
+
+                <!-- Cart Footer & Checkout -->
+                <div class="p-4 sm:p-6 border-t border-dark-border bg-dark-card space-y-4 shrink-0">
+                    <div class="space-y-1.5 text-xs">
+                        <div class="flex justify-between text-gray-400">
+                            <span>Subtotal</span>
+                            <span id="cartSubtotal" class="text-white font-semibold">KSh 0</span>
+                        </div>
+                        <div class="flex justify-between text-gray-400">
+                            <span>Fulfillment & Insurance</span>
+                            <span class="text-gold font-semibold">FREE</span>
+                        </div>
+                        <div class="flex justify-between text-sm font-bold text-white pt-2 border-t border-dark-border">
+                            <span>Total Amount</span>
+                            <span id="cartTotal" class="gold-text-gradient text-lg">KSh 0</span>
+                        </div>
+                    </div>
+
+                    <button id="checkoutBtn" onclick="openMPesaCheckout()" class="w-full bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-black font-extrabold py-3.5 rounded-xl transition-all shadow-lg shadow-gold/20 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-mobile-screen-button text-base"></i> Checkout with M-PESA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- M-PESA DARAJA CHECKOUT MODAL -->
+    <div id="mpesaModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="bg-dark-surface border border-gold/40 rounded-2xl max-w-md w-full p-6 shadow-2xl relative overflow-hidden">
+            
+            <!-- Close Button -->
+            <button onclick="closeMPesaModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Step 1: Input Phone Number -->
+            <div id="mpesaStepInput">
+                <div class="text-center mb-6">
+                    <div class="w-14 h-14 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" class="h-8" alt="M-Pesa" onerror="this.src='https://placehold.co/100x40/000/FFF?text=M-PESA'">
+                    </div>
+                    <h3 class="text-lg font-bold text-white">M-Pesa Daraja STK Express</h3>
+                    <p class="text-xs text-gray-400 mt-1">Enter your Safaricom phone number to receive the prompt on your phone screen.</p>
+                </div>
+
+                <div class="bg-dark-card border border-dark-border rounded-xl p-4 mb-4 text-xs space-y-2">
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Merchant</span>
+                        <span class="text-white font-semibold">HarryTech Solutions Ltd</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Paybill No.</span>
+                        <span class="text-gold font-mono font-bold">884992</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Total Payable</span>
+                        <span id="mpesaModalTotal" class="text-white font-bold text-sm">KSh 0</span>
+                    </div>
+                </div>
+
+                <form onsubmit="initiateStkPush(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1.5">Safaricom Mobile Number</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-gray-400">+254</span>
+                            <input type="tel" id="mpesaPhone" required pattern="^(?:254|\+254|0)?(7[0-9]{8}|1[0-9]{8})$" placeholder="712345678" 
+                                   class="w-full bg-dark-base border border-dark-border rounded-xl py-3 pl-14 pr-4 text-sm text-white font-mono focus:border-gold">
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-1">Format: 0712345678 or 0799999999</p>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-paper-plane"></i> Send STK Push Request
+                    </button>
+                </form>
+            </div>
+
+            <!-- Step 2: Simulated Phone Prompt Screen -->
+            <div id="mpesaStepSim" class="hidden text-center py-4">
+                <div class="phone-shake inline-block bg-zinc-900 border-4 border-zinc-700 rounded-3xl p-4 w-64 shadow-2xl mx-auto my-2 text-left text-xs font-sans text-white">
+                    <div class="bg-emerald-600 text-white p-2 rounded-t-lg font-bold text-[11px] flex justify-between items-center">
+                        <span>SIM Toolkit / M-PESA</span>
+                        <i class="fa-solid fa-wifi text-[10px]"></i>
+                    </div>
+                    <div class="bg-zinc-800 p-3 rounded-b-lg border border-zinc-700 space-y-2">
+                        <p class="text-[11px]">Pay KSh <span id="stkAmount" class="font-bold">0</span> to HarryTech Solutions?</p>
+                        <p class="text-[10px] text-zinc-400">Enter M-PESA PIN:</p>
+                        <input type="password" id="simPin" maxlength="4" placeholder="••••" class="w-full bg-black text-center text-lg tracking-widest text-emerald-400 border border-zinc-600 rounded p-1">
+                        <div class="flex justify-between gap-2 pt-2">
+                            <button onclick="cancelStkSim()" class="w-1/2 bg-zinc-700 hover:bg-zinc-600 text-white text-[10px] py-1 rounded">Cancel</button>
+                            <button onclick="submitStkSim()" class="w-1/2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[10px] py-1 rounded">Send</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-gold animate-pulse mt-4">Waiting for customer response via Safaricom Daraja API...</p>
+            </div>
+
+            <!-- Step 3: Success Receipt -->
+            <div id="mpesaStepSuccess" class="hidden text-center space-y-4 py-2">
+                <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl border border-emerald-500/40">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-extrabold text-white">Payment Confirmed!</h3>
+                    <p class="text-xs text-gray-400 mt-1">Transaction verified via M-Pesa Daraja API Engine.</p>
+                </div>
+
+                <div class="bg-dark-card border border-dark-border rounded-xl p-4 text-left text-xs space-y-2 font-mono">
+                    <div class="flex justify-between border-b border-dark-border pb-2">
+                        <span class="text-gray-400">Receipt No:</span>
+                        <span id="receiptRef" class="text-gold font-bold">RKA983492X</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Amount Paid:</span>
+                        <span id="receiptAmount" class="text-white">KSh 0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Phone:</span>
+                        <span id="receiptPhone" class="text-white">2547***</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Status:</span>
+                        <span class="text-emerald-400 font-bold">SUCCESS (200 OK)</span>
+                    </div>
+                </div>
+
+                <button onclick="closeMPesaModal(); clearCart();" class="w-full bg-gold hover:bg-gold-hover text-black font-bold py-3 rounded-xl transition-all">
+                    Done & Return to Store
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- AUTHENTICATION MODAL (LOGIN / REGISTER) -->
+    <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="bg-dark-surface border border-gold/30 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Auth Header -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mx-auto text-gold text-xl font-bold mb-2">
+                    H
+                </div>
+                <h3 id="authTitle" class="text-lg font-bold text-white">Sign In to HarryTech</h3>
+                <p class="text-xs text-gray-400 mt-1">Access your account, track orders & save items</p>
+            </div>
+
+            <!-- Form -->
+            <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                <div id="nameFieldContainer" class="hidden">
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Full Name</label>
+                    <input type="text" id="authName" placeholder="John Doe" class="w-full bg-dark-base border border-dark-border rounded-xl p-2.5 text-xs text-white focus:border-gold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Email Address</label>
+                    <input type="email" id="authEmail" required placeholder="user@example.com" class="w-full bg-dark-base border border-dark-border rounded-xl p-2.5 text-xs text-white focus:border-gold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Password</label>
+                    <input type="password" id="authPassword" required placeholder="••••••••" class="w-full bg-dark-base border border-dark-border rounded-xl p-2.5 text-xs text-white focus:border-gold">
+                </div>
+
+                <div class="flex items-center justify-between text-xs text-gray-400">
+                    <label class="flex items-center gap-1.5 cursor-pointer">
+                        <input type="checkbox" checked class="rounded bg-dark-base border-dark-border text-gold focus:ring-0">
+                        Remember me
+                    </label>
+                    <a href="#" class="hover:text-gold">Forgot password?</a>
+                </div>
+
+                <button type="submit" id="authSubmitBtn" class="w-full bg-gold hover:bg-gold-hover text-black font-bold py-3 rounded-xl transition-all shadow-lg shadow-gold/20 text-xs">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="mt-6 text-center text-xs text-gray-400">
+                <span id="authToggleText">Don't have an account?</span>
+                <button onclick="toggleAuthMode()" id="authToggleBtn" class="text-gold font-bold ml-1 hover:underline">Register</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL VIEW MODAL -->
+    <div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="bg-dark-surface border border-gold/30 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative overflow-hidden flex flex-col md:flex-row gap-6">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <div class="w-full md:w-1/2 h-64 md:h-auto bg-dark-card rounded-xl overflow-hidden flex items-center justify-center border border-dark-border">
+                <img id="modalImg" src="" class="object-contain w-full h-full p-4" alt="Product">
+            </div>
+
+            <div class="w-full md:w-1/2 flex flex-col justify-between space-y-4">
+                <div>
+                    <span id="modalBadge" class="inline-block bg-gold/20 text-gold text-[10px] font-bold px-2.5 py-0.5 rounded-full mb-2">NEW</span>
+                    <h2 id="modalTitle" class="text-xl font-bold text-white mb-1">Product Title</h2>
+                    <p id="modalCategory" class="text-xs text-gray-400 mb-3">Category</p>
+                    <div id="modalPrice" class="text-2xl font-extrabold gold-text-gradient mb-4">KSh 0</div>
+                    <p id="modalDesc" class="text-xs text-gray-300 leading-relaxed mb-4">Description details go here...</p>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2 text-xs text-emerald-400">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>In Stock • Fast Fulfillment by HarryTech</span>
+                    </div>
+                    <button id="modalAddToCartBtn" class="w-full bg-gold hover:bg-gold-hover text-black font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add To Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark-surface border-t border-dark-border mt-16 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-3">
+                <a href="#" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gold flex items-center justify-center font-black text-black">H</div>
+                    <span class="text-lg font-bold text-white">HARRY<span class="gold-text-gradient">TECH</span></span>
+                </a>
+                <p class="text-xs text-gray-400 leading-relaxed">
+                    Kenya's premier single-seller official tech hub. High performance laptops, smartphones, and authentic accessories delivered with Daraja M-Pesa speed.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold text-gold uppercase tracking-wider mb-3">Shop Categories</h4>
+                <ul class="space-y-2 text-xs text-gray-400">
+                    <li><a href="#" onclick="switchCategory('Laptops')" class="hover:text-white">Laptops & MacBooks</a></li>
+                    <li><a href="#" onclick="switchCategory('Smartphones')" class="hover:text-white">Smartphones & Tablets</a></li>
+                    <li><a href="#" onclick="switchCategory('Audio')" class="hover:text-white">Audio & Sound Systems</a></li>
+                    <li><a href="#" onclick="switchCategory('Gaming')" class="hover:text-white">Gaming Consoles & Gear</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold text-gold uppercase tracking-wider mb-3">Customer Support</h4>
+                <ul class="space-y-2 text-xs text-gray-400">
+                    <li><i class="fa-solid fa-location-dot mr-1.5 text-gold"></i> Nairobi / Thika Town, Kenya</li>
+                    <li><i class="fa-solid fa-phone mr-1.5 text-gold"></i> +254 700 000 000</li>
+                    <li><i class="fa-solid fa-envelope mr-1.5 text-gold"></i> sales@harrytech.co.ke</li>
+                    <li><i class="fa-solid fa-shield-halved mr-1.5 text-gold"></i> Direct Store Guarantee</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold text-gold uppercase tracking-wider mb-3">Payment Secured By</h4>
+                <div class="bg-dark-card border border-dark-border rounded-xl p-3 flex items-center gap-3">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" class="h-6" alt="M-Pesa" onerror="this.src='https://placehold.co/80x30/000/FFF?text=M-PESA'">
+                    <span class="text-[11px] text-gray-300">Daraja 2.0 API Instant Checkout</span>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-dark-border text-center text-xs text-gray-500">
+            © 2026 HarryTech Solutions. All rights reserved. Admin seller model enforced.
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // --- INITIAL STATE & DUMMY DATA ---
+        let products = [
+            {
+                id: 1,
+                title: "Apple MacBook Pro 16\" M3 Max (36GB, 1TB SSD)",
+                category: "Laptops",
+                price: 465000,
+                rating: 4.9,
+                badge: "OFFICIAL HARRYTECH",
+                inStock: true,
+                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&auto=format&fit=crop&q=80",
+                description: "Liquid Retina XDR display, 16-core CPU, 40-core GPU. Delivered factory sealed by HarryTech Solutions."
+            },
+            {
+                id: 2,
+                title: "Samsung Galaxy S24 Ultra 5G (512GB Titanium Black)",
+                category: "Smartphones",
+                price: 185000,
+                rating: 4.8,
+                badge: "BESTSELLER",
+                inStock: true,
+                image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&auto=format&fit=crop&q=80",
+                description: "200MP camera with Galaxy AI, S-Pen included, Snapdragon 8 Gen 3 Processor."
+            },
+            {
+                id: 3,
+                title: "Sony WH-1000XM5 Wireless Noise-Canceling Headphones",
+                category: "Audio",
+                price: 48000,
+                rating: 4.9,
+                badge: "HOT ITEM",
+                inStock: true,
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
+                description: "Industry-leading noise canceling with two processors and 8 microphones. 30-hour battery life."
+            },
+            {
+                id: 4,
+                title: "Sony PlayStation 5 Slim Digital Edition + Extra Controller",
+                category: "Gaming",
+                price: 78000,
+                rating: 4.7,
+                badge: "OFFER",
+                inStock: true,
+                image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=600&auto=format&fit=crop&q=80",
+                description: "Ultra-high speed SSD, ray tracing support, 4K gaming output with DualSense wireless controller."
+            },
+            {
+                id: 5,
+                title: "Apple iPhone 15 Pro Max 256GB Natural Titanium",
+                category: "Smartphones",
+                price: 198000,
+                rating: 4.9,
+                badge: "NEW",
+                inStock: true,
+                image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&auto=format&fit=crop&q=80",
+                description: "Forged in titanium, A17 Pro chip, customizable Action button, 5x Telephoto optical zoom."
+            },
+            {
+                id: 6,
+                title: "Anker PowerCore 24000mAh Power Bank 140W",
+                category: "Accessories",
+                price: 14500,
+                rating: 4.6,
+                badge: "GENUINE",
+                inStock: true,
+                image: "https://images.unsplash.com/photo-1609592424109-dd9892f1b177?w=600&auto=format&fit=crop&q=80",
+                description: "Ultra-fast charging for MacBooks and smartphones simultaneously with smart digital display."
+            }
+        ];
+
+        let categories = ["All", "Laptops", "Smartphones", "Audio", "Gaming", "Accessories", "Smart Home"];
+        let selectedCategory = "All";
+        let cart = [];
+        let currentUser = null; // { name, email, isAdmin }
+        let isAuthLoginMode = true;
+
+        // --- APP INITIALIZATION ---
+        window.onload = function() {
+            renderCategories();
+            renderProducts();
+            updateCartUI();
+        };
+
+        // --- RENDER CATEGORIES ---
+        function renderCategories() {
+            const container = document.getElementById('categoriesBar');
+            container.innerHTML = categories.map(cat => `
+                <button onclick="switchCategory('${cat}')" 
+                        class="px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap flex items-center gap-2 ${selectedCategory === cat ? 'bg-gold text-black shadow-lg shadow-gold/20' : 'bg-dark-surface text-gray-300 hover:bg-dark-card border border-dark-border'}">
+                    ${cat === 'All' ? '<i class="fa-solid fa-grid-2"></i>' : ''}
+                    ${cat}
+                </button>
+            `).join('');
+        }
+
+        function switchCategory(cat) {
+            selectedCategory = cat;
+            renderCategories();
+            renderProducts();
+        }
+
+        // --- RENDER PRODUCTS ---
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const emptyState = document.getElementById('emptyState');
+            const searchVal = (document.getElementById('searchInput').value || document.getElementById('mobileSearchInput').value || '').toLowerCase();
+            const maxPrice = parseFloat(document.getElementById('priceRange').value);
+            const inStockOnly = document.getElementById('inStockOnly').checked;
+
+            // Filter logic
+            let filtered = products.filter(p => {
+                const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
+                const matchesSearch = p.title.toLowerCase().includes(searchVal) || p.description.toLowerCase().includes(searchVal);
+                const matchesPrice = p.price <= maxPrice;
+                const matchesStock = !inStockOnly || p.inStock;
+                return matchesCategory && matchesSearch && matchesPrice && matchesStock;
+            });
+
+            // Sorting logic
+            const sortBy = document.getElementById('sortBy').value;
+            if (sortBy === 'low-high') filtered.sort((a,b) => a.price - b.price);
+            if (sortBy === 'high-low') filtered.sort((a,b) => b.price - a.price);
+
+            document.getElementById('productCount').innerText = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="bg-dark-surface border border-dark-border hover:border-gold/50 rounded-2xl p-4 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group">
+                    <div>
+                        <!-- Product Image & Badge -->
+                        <div class="relative w-full h-44 bg-dark-card rounded-xl overflow-hidden mb-3 flex items-center justify-center border border-dark-border/50 cursor-pointer" onclick="openProductModal(${p.id})">
+                            ${p.badge ? `<span class="absolute top-2.5 left-2.5 bg-gold text-black font-extrabold text-[9px] px-2 py-0.5 rounded-full z-10">${p.badge}</span>` : ''}
+                            <img src="${p.image}" alt="${p.title}" class="object-contain h-36 w-full group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/400x300/151C28/D4AF37?text=HarryTech'">
+                        </div>
+
+                        <!-- Info -->
+                        <span class="text-[10px] text-gold font-bold uppercase tracking-wider">${p.category}</span>
+                        <h3 class="text-xs font-bold text-white line-clamp-2 mt-1 cursor-pointer hover:text-gold transition-colors" onclick="openProductModal(${p.id})">${p.title}</h3>
+                        
+                        <div class="flex items-center gap-1 mt-1 text-amber-400 text-[10px]">
+                            <i class="fa-solid fa-star"></i>
+                            <span class="font-bold text-gray-300">${p.rating}</span>
+                            <span class="text-gray-500">(HarryTech Verified)</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-dark-border/60 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-gray-400 block leading-none">Price</span>
+                            <span class="text-sm font-extrabold gold-text-gradient">KSh ${p.price.toLocaleString()}</span>
+                        </div>
+
+                        <button onclick="addToCart(${p.id})" class="bg-gold hover:bg-gold-hover text-black p-2.5 rounded-xl transition-all flex items-center justify-center font-bold" title="Add to Cart">
+                            <i class="fa-solid fa-cart-plus text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- SEARCH & FILTERS ---
+        function handleSearch() { renderProducts(); }
+        function handleSearchMobile() { renderProducts(); }
+        function handlePriceFilter(val) {
+            document.getElementById('priceValue').innerText = `KSh ${parseInt(val).toLocaleString()}`;
+            renderProducts();
+        }
+        function applyAllFilters() { renderProducts(); }
+        function handleSort() { renderProducts(); }
+        function resetFilters() {
+            document.getElementById('priceRange').value = 500000;
+            document.getElementById('priceValue').innerText = 'KSh 500,000';
+            document.getElementById('inStockOnly').checked = false;
+            document.getElementById('searchInput').value = '';
+            document.getElementById('mobileSearchInput').value = '';
+            renderProducts();
+        }
+
+        // --- CART SYSTEM ---
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            updateCartUI();
+            showNotification(`Added ${product.title.substring(0,20)}... to Cart!`);
+        }
+
+        function updateCartQty(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            updateCartUI();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cartBadge');
+            const container = document.getElementById('cartItemsContainer');
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalSum = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            // Badge
+            if (totalQty > 0) {
+                badge.innerText = totalQty;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            // Totals
+            document.getElementById('cartSubtotal').innerText = `KSh ${totalSum.toLocaleString()}`;
+            document.getElementById('cartTotal').innerText = `KSh ${totalSum.toLocaleString()}`;
+            document.getElementById('mpesaModalTotal').innerText = `KSh ${totalSum.toLocaleString()}`;
+
+            // Items List
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-500">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-2 text-gray-600"></i>
+                        <p class="text-xs font-semibold">Your cart is currently empty.</p>
+                        <button onclick="toggleCartDrawer()" class="mt-3 text-gold text-xs underline">Start shopping</button>
+                    </div>
+                `;
+                document.getElementById('checkoutBtn').disabled = true;
+                document.getElementById('checkoutBtn').classList.add('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
+            document.getElementById('checkoutBtn').disabled = false;
+            document.getElementById('checkoutBtn').classList.remove('opacity-50', 'cursor-not-allowed');
+
+            container.innerHTML = cart.map(item => `
+                <div class="bg-dark-card border border-dark-border rounded-xl p-3 flex gap-3 items-center">
+                    <img src="${item.image}" class="w-14 h-14 object-contain rounded-lg bg-dark-base p-1 shrink-0" onerror="this.src='https://placehold.co/100x100/151C28/D4AF37?text=Tech'">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-xs font-bold text-white truncate">${item.title}</h4>
+                        <div class="text-xs font-bold gold-text-gradient mt-0.5">KSh ${item.price.toLocaleString()}</div>
+                        
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="updateCartQty(${item.id}, -1)" class="w-6 h-6 rounded bg-dark-base border border-dark-border text-white text-xs flex items-center justify-center hover:border-gold">-</button>
+                            <span class="text-xs font-bold text-white px-1">${item.qty}</span>
+                            <button onclick="updateCartQty(${item.id}, 1)" class="w-6 h-6 rounded bg-dark-base border border-dark-border text-white text-xs flex items-center justify-center hover:border-gold">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" class="text-gray-500 hover:text-red-400 p-1 text-xs shrink-0">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function toggleCartDrawer() {
+            const backdrop = document.getElementById('cartBackdrop');
+            const panel = document.getElementById('cartPanel');
+
+            if (backdrop.classList.contains('hidden')) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    panel.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                backdrop.classList.add('opacity-0');
+                panel.classList.add('translate-x-full');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // --- M-PESA CHECKOUT SIMULATION ---
+        function openMPesaCheckout() {
+            if (cart.length === 0) return;
+            toggleCartDrawer();
+            
+            document.getElementById('mpesaStepInput').classList.remove('hidden');
+            document.getElementById('mpesaStepSim').classList.add('hidden');
+            document.getElementById('mpesaStepSuccess').classList.add('hidden');
+            
+            document.getElementById('mpesaModal').classList.remove('hidden');
+        }
+
+        function closeMPesaModal() {
+            document.getElementById('mpesaModal').classList.add('hidden');
+        }
+
+        function initiateStkPush(e) {
+            e.preventDefault();
+            const phone = document.getElementById('mpesaPhone').value;
+            const totalSum = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            document.getElementById('stkAmount').innerText = totalSum.toLocaleString();
+            document.getElementById('mpesaStepInput').classList.add('hidden');
+            document.getElementById('mpesaStepSim').classList.remove('hidden');
+        }
+
+        function cancelStkSim() {
+            document.getElementById('mpesaStepSim').classList.add('hidden');
+            document.getElementById('mpesaStepInput').classList.remove('hidden');
+        }
+
+        function submitStkSim() {
+            const pin = document.getElementById('simPin').value;
+            if (pin.length !== 4) {
+                alert("Please enter a valid 4-digit M-Pesa PIN.");
+                return;
+            }
+
+            const phone = document.getElementById('mpesaPhone').value;
+            const totalSum = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const refCode = 'RKA' + Math.floor(10000000 + Math.random() * 90000000);
+
+            document.getElementById('receiptRef').innerText = refCode;
+            document.getElementById('receiptAmount').innerText = `KSh ${totalSum.toLocaleString()}`;
+            document.getElementById('receiptPhone').innerText = `254${phone.slice(-9)}`;
+
+            document.getElementById('mpesaStepSim').classList.add('hidden');
+            document.getElementById('mpesaStepSuccess').classList.remove('hidden');
+        }
+
+        // --- AUTHENTICATION STATE & MODAL ---
+        function openAuthModal(mode = 'login') {
+            isAuthLoginMode = mode === 'login';
+            updateAuthModalUI();
+            document.getElementById('authModal').classList.remove('hidden');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.add('hidden');
+        }
+
+        function toggleAuthMode() {
+            isAuthLoginMode = !isAuthLoginMode;
+            updateAuthModalUI();
+        }
+
+        function updateAuthModalUI() {
+            const title = document.getElementById('authTitle');
+            const submitBtn = document.getElementById('authSubmitBtn');
+            const toggleText = document.getElementById('authToggleText');
+            const toggleBtn = document.getElementById('authToggleBtn');
+            const nameContainer = document.getElementById('nameFieldContainer');
+
+            if (isAuthLoginMode) {
+                title.innerText = "Sign In to HarryTech";
+                submitBtn.innerText = "Sign In";
+                toggleText.innerText = "Don't have an account?";
+                toggleBtn.innerText = "Register";
+                nameContainer.classList.add('hidden');
+            } else {
+                title.innerText = "Create Account";
+                submitBtn.innerText = "Register Now";
+                toggleText.innerText = "Already registered?";
+                toggleBtn.innerText = "Sign In";
+                nameContainer.classList.remove('hidden');
+            }
+        }
+
+        function handleAuthSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('authEmail').value;
+            const name = isAuthLoginMode ? email.split('@')[0] : document.getElementById('authName').value;
+
+            // Check if logging in as admin demo
+            const isAdmin = email.toLowerCase().includes('admin');
+
+            currentUser = {
+                name: name || "Harry Customer",
+                email: email,
+                isAdmin: isAdmin
+            };
+
+            renderUserNav();
+            closeAuthModal();
+            showNotification(`Welcome back, ${currentUser.name}!`);
+        }
+
+        function renderUserNav() {
+            const container = document.getElementById('authNavContainer');
+            const adminBtn = document.getElementById('adminNavBtn');
+
+            if (currentUser) {
+                container.innerHTML = `
+                    <div class="flex items-center gap-2 bg-dark-card border border-dark-border px-3 py-1.5 rounded-xl text-xs">
+                        <div class="w-6 h-6 rounded-full bg-gold text-black flex items-center justify-center font-bold text-[10px]">
+                            ${currentUser.name.charAt(0).toUpperCase()}
+                        </div>
+                        <span class="text-white font-semibold hidden sm:inline">${currentUser.name}</span>
+                        <button onclick="logoutUser()" class="text-gray-400 hover:text-red-400 ml-1" title="Sign Out">
+                            <i class="fa-solid fa-power-off text-xs"></i>
+                        </button>
+                    </div>
+                `;
+
+                // Show Admin toggle for all users or specified admin user
+                adminBtn.classList.remove('hidden');
+            } else {
+                container.innerHTML = `
+                    <button onclick="openAuthModal('login')" class="text-xs sm:text-sm text-gray-300 hover:text-gold font-semibold px-2 py-1 flex items-center gap-1.5 transition-colors">
+                        <i class="fa-regular fa-user text-base"></i>
+                        <span>Sign In</span>
+                    </button>
+                `;
+                adminBtn.classList.add('hidden');
+                document.getElementById('adminPanel').classList.add('hidden');
+            }
+        }
+
+        function logoutUser() {
+            currentUser = null;
+            renderUserNav();
+            showNotification("Signed out successfully.");
+        }
+
+        // --- PRODUCT DETAIL MODAL ---
+        function openProductModal(id) {
+            const p = products.find(prod => prod.id === id);
+            if (!p) return;
+
+            document.getElementById('modalImg').src = p.image;
+            document.getElementById('modalTitle').innerText = p.title;
+            document.getElementById('modalCategory').innerText = `Category: ${p.category}`;
+            document.getElementById('modalPrice').innerText = `KSh ${p.price.toLocaleString()}`;
+            document.getElementById('modalDesc').innerText = p.description;
+            document.getElementById('modalBadge').innerText = p.badge || "VERIFIED";
+
+            const btn = document.getElementById('modalAddToCartBtn');
+            btn.onclick = () => {
+                addToCart(p.id);
+                closeProductModal();
+            };
+
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        // --- ADMIN STORE MANAGEMENT (SINGLE SELLER CONTROL) ---
+        function toggleAdminView() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                panel.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function handleCreateProduct(e) {
+            e.preventDefault();
+
+            const newProd = {
+                id: Date.now(),
+                title: document.getElementById('pTitle').value,
+                category: document.getElementById('pCategory').value,
+                price: parseFloat(document.getElementById('pPrice').value),
+                rating: 5.0,
+                badge: document.getElementById('pBadge').value.toUpperCase() || "HARRYTECH",
+                inStock: true,
+                image: document.getElementById('pImage').value,
+                description: document.getElementById('pDesc').value || "Official HarryTech stock."
+            };
+
+            products.unshift(newProd);
+            renderProducts();
+            document.getElementById('addProductForm').reset();
+            showNotification("New product added to HarryTech store!");
+        }
+
+        // --- NOTIFICATION TOAST ---
+        function showNotification(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 bg-gold text-black font-extrabold px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 text-xs transition-all transform translate-y-full';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-sm"></i> ${msg}`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-full');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-full');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
